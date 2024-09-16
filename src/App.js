@@ -9,14 +9,9 @@ function App() {
   const [updatedCountries,setUpdatedCountries] = useState([]);
 
   useEffect(()=>{
-    let getData;
     if(searchValue){
-      getData = setTimeout(()=>{
-        performSearch(searchValue);
-      },500)
-    }
-
-    return () => clearTimeout(getData);
+      performSearch(searchValue);
+    }  
   },[searchValue])
 
   const getCountries = async() => {
@@ -60,7 +55,7 @@ function App() {
     <div className="container">
       {
         updatedCountries && updatedCountries?.map((country,idx)=>(
-          <div className='countryContainer'>
+          <div className='countryContainer' key={idx}>
             <img src={country?.flag} alt={country?.name} className='countryImg'/>
             <p>{country?.name}</p>
           </div>
