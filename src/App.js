@@ -55,7 +55,7 @@ function App() {
     <div className="container">
       {
         updatedCountries && updatedCountries?.map((country,idx)=>(
-          <div className='countryContainer' key={idx}>
+          <div className={`countryContainer ${country}Card`} key={idx}>
             <img src={country?.flags?.png} alt={country?.name?.common} className='countryImg'/>
             <p>{country?.name?.common}</p>
           </div>
