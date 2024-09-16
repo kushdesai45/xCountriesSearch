@@ -10,13 +10,13 @@ function App() {
 
   useEffect(()=>{
     if(searchValue){
-      performSearch(searchValue);
+      performSearch();
     }  
   },[searchValue])
 
   const getCountries = async() => {
     try{
-      const url = 'https://xcountries-backend.azurewebsites.net/all';
+      const url = 'https://restcountries.com/v3.1/all';
       let data = await axios.get(url);
       setCountries(data?.data);
       setUpdatedCountries(data?.data);
@@ -26,10 +26,10 @@ function App() {
     }
   }
 
-  const performSearch = (value) => {
+  const performSearch = () => {
     if (searchValue) {
       const filtered = countries.filter(country =>
-        country.name.toLowerCase().includes(searchValue.toLowerCase())
+        country?.name?.common?.toLowerCase().includes(searchValue.toLowerCase())
       );
       setUpdatedCountries(filtered);
     } else {
@@ -56,8 +56,8 @@ function App() {
       {
         updatedCountries && updatedCountries?.map((country,idx)=>(
           <div className='countryContainer' key={idx}>
-            <img src={country?.flag} alt={country?.name} className='countryImg'/>
-            <p>{country?.name}</p>
+            <img src={country?.flags?.png} alt={country?.name?.common} className='countryImg'/>
+            <p>{country?.name?.common}</p>
           </div>
         ))
       }
